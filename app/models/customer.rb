@@ -1,0 +1,10 @@
+class Customer < ApplicationRecord
+
+  #fields
+  #name type:String
+  #mobile type:Integer
+  validates :name, presence: true
+  validates :mobile, presence: {message: "badd operations, only numbers accepted"}, 
+    numericality: true, length: {minimum: 10, maximum: 12}
+
+end

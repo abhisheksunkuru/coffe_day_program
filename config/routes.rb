@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :customers
-      resources :items
+      resources :items do
+        member do
+          put 'add_to_cart'
+          put 'remove_from_cart'
+        end
+      end
       resources :carts
     end
   end

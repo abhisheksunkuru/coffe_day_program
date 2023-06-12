@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   validates :tax, numericality: true
   validates :price, numericality: {greater_than: 0}
   validates :avaialable_quantity, numericality: {greater_than_or_equal_to: 0}
+  has_and_belongs_to_many :discounts
 
   def add_to_cart(customer_id,quantity=1)
     #increment quantity if cart_item already exisits else create new cart item

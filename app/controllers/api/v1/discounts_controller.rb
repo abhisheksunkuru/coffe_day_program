@@ -1,11 +1,11 @@
-class Api::V1::OffersController < ActionController::API
+class Api::V1::DiscountsController < ActionController::API
 
   def index
-    @offers = Offer.all
+    @offers = Discount.all
   end
 
   def create
-    offer = Offer.new(offer_params)
+    offer = Discount.new(offer_params)
     if offer.save
       render json: {message: "offer created successfully"}
     else
@@ -14,14 +14,14 @@ class Api::V1::OffersController < ActionController::API
   end
 
   def show
-    @offer = Offer.where(id: params[:id]).first
+    @offer = Discount.where(id: params[:id]).first
     unless @offer.present?
       render json:{error: "offer not found"}
     end
   end
 
   def update
-    @offer = Offer.where(id: params[:id]).first
+    @offer = Discount.where(id: params[:id]).first
     if @offer.present? && @offer.update(offer_params)
       render json: {message: "updated successfully"},status: :ok
     elsif @offer.present?
@@ -34,7 +34,7 @@ class Api::V1::OffersController < ActionController::API
   private
 
   def offer_params
-    params.require(:offer).permit(:name, :purchased_item_min_quantity, :free_item_quantities, :free_item_discount, purchased_item_ids:[], free_item_ids:[])
+    params.require(:discount).permit(:id, :discounted_item_id, :discount_percentages, :min_quantity,:start_date, :end_date)
   end
 
 end

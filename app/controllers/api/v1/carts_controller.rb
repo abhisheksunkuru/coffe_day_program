@@ -12,6 +12,7 @@ class Api::V1::CartsController < ActionController::API
   def apply_offers
     cart = Cart.where(id: params[:id]).last
     if cart.present?
+      cart_items = cart.cart_items
     else
       render json:{error: "cart not found"},status: 422
     end

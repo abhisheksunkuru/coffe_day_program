@@ -11,11 +11,12 @@ class Item < ApplicationRecord
     # cart = customer.current_cart
     # cart_item = cart.cart_items.where(item_id: self.id).
     cart_item,cart = get_cart_item_for_customer(customer_id)
+
     if cart_item.present?
       cart_quantity = cart_item.quantity
-      cart_item.update(quantity: quantity+ cart_quantity)
+      cart_item.update(quantity: quantity.to_i + cart_quantity)
     else
-      cart.cart_items.create(item_id: id, cart_id: cart.id, quantity: 1)
+      cart.cart_items.create(item_id: id, cart_id: cart.id, quantity: quantity.to_i)
     end
     cart
   end
@@ -24,6 +25,7 @@ class Item < ApplicationRecord
     cart_item,cart = get_cart_item_for_customer(customer_id)
     if cart_item.present? && cart_item.quantity > 0
       cart_quantity = cart_item.quantity
+      quantity = quantity.to_i
       update_quantity = (quantity > cart_quantity ? 0 : cart_quantity-quantity)
 
       if update_quantity > 0

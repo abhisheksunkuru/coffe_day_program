@@ -48,7 +48,7 @@ class Api::V1::ItemsController < ActionController::API
 
   def add_to_cart
     item = Item.where(id: params[:id]).first
-    if params[:customer_id].present? && Customer.where(id: params[:customer_id]).last.present?
+    if params[:customer_id].present? && Customer.where(id: params[:customer_id]).last.present?  
       @cart = params[:quantity].present? ? item.add_to_cart(params[:customer_id], params[:quantity]) : item.add_to_cart(params[:customer_id])
       render template:"api/v1/carts/show"
     elsif params[:customer_id].present?

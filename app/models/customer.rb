@@ -4,7 +4,7 @@ class Customer < ApplicationRecord
   #name type:String
   #mobile type:Integer
   validates :name, presence: true
-  validates :mobile, presence: {message: "badd operations, only numbers accepted"},
+  validates :mobile, presence: {message: "bad operations, only numbers accepted"},
     numericality: true, length: {minimum: 10, maximum: 12}
 
   has_many :carts

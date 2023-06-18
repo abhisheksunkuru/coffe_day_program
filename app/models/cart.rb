@@ -22,7 +22,6 @@ class Cart < ApplicationRecord
     total_discount = 0
     item_ids = cart_items.map(&:item_id)
     cart_items.each do |cart_item|
-      debugger
       discounts = cart_item.item.discounts.where(["min_quantity <= ?",cart_item.quantity])
       if discounts.present?
         discounts.each do |discount|
